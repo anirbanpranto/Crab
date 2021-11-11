@@ -15,6 +15,7 @@ function App() {
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
         </Container>
+        {/* Random */}
       </Navbar>
     </div>
   );
