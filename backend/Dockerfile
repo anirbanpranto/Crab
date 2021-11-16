@@ -1,13 +1,15 @@
-FROM node:14-slim
+FROM node:alpine
 
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/node-app && chown -R node:node /usr/src/node-app
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/node-app
 
-COPY . .
+COPY package.json yarn.lock ./
 
-RUN yarn install
+USER node
 
-EXPOSE 1337
+RUN yarn install --pure-lockfile
 
-CMD ["node", "./dist/app.js"]
+COPY --chown=node:node . .
+
+EXPOSE 3000
