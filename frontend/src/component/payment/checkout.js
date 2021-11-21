@@ -4,8 +4,8 @@ import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
 const CheckoutForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
-  const appointment_id = props.appointment_id
-  console.log(appointment_id)
+  const payment_id = props.payment_id
+  console.log(payment_id)
 
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
@@ -22,7 +22,7 @@ const CheckoutForm = (props) => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000/successful/" + appointment_id,
+        return_url: "http://localhost:3000/successful/" + payment_id,
       },
     });
 

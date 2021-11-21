@@ -82,16 +82,26 @@ function ViewRating() {
       sortable: true,
     },
     {
+      name: 'Amount',
+      cell: (row, index) => {
+        return row.payment ? row.payment.amount : "-"
+      }
+    },
+    {
       name: 'Payment',
       cell: (row, index) => {
-        return row.payment ? "Paid" : <Button style={{ backgroundColor: "purple" }} onClick={() => pay(index)}>Pay</Button>
+        if(row.status === "Accepted"){
+          return row.payment ? row.payment.status === "Paid" ? "Paid" : <Button style={{ backgroundColor: "purple" }} onClick={() => pay(index)}>Pay</Button> : <Button style={{ backgroundColor: "purple" }} onClick={() => pay(index)}>Pay</Button>
+        }
+        else{
+          return "N/A"
+        }
       }
     }
   ];
 
   const pay = async (index) => {
-    console.log(index)
-    await axios.get('http://localhost:1337/v1/payments/session?id='+data[index].id).then((res) => {
+    await axios.get('http://localhost:1337/v1/payments/session?id='+data[index].payment.id).then((res) => {
       setSecret(res.data.client_secret);
       setElem({
         clientSecret: secret
@@ -99,31 +109,13 @@ function ViewRating() {
       setElem({
         clientSecret: secret
       })
-      setId(data[index].id)
+      setId(data[index].payment.id)
     })
     setLoader(true)
     setTimeout(()=>{
       setLoader(false)
       setShow(true)
     }, 2000)
-  }
-
-  const req = async () => {
-    axios.post("http://localhost:1337/v1/appointments/rating?rate=" + rating + "&id=" + curredit.id, {
-      cartype: carType ? carType : curredit.cartype,
-      serviceType: serviceType ? serviceType : curredit.serviceType,
-      address: address ? address : curredit.address,
-      schedule: date ? date : curredit.schedule
-    }).then((res) => {
-      // localStorage.setItem("user", res.data);
-      // localStorage.setItem("loggedIn", true);
-      setShow(false);
-      loadData()
-    })
-  }
-
-  const showModal = () => {
-    setShow(true)
   }
 
   return (
@@ -138,7 +130,7 @@ function ViewRating() {
         </Modal.Header>
         <Modal.Body>
           <Elements stripe={stripePromise} options={elem}>
-            <Checkout appointment_id={id} />
+            <Checkout payment_id={id} />
           </Elements>
         </Modal.Body>
         <Modal.Footer>

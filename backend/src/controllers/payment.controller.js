@@ -16,13 +16,13 @@ const createPayment = catchAsync(async (req, res) => {
 
 const calculateOrderAmount = async (id) => {
   const payment = await paymentService.getPaymentById(id);
-  return payment.amount;
+  return payment.amount + 50;
 };
 
 const createSession = catchAsync(async (req, res) => {
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: calculateOrderAmount(req.query.id),
-    currency: "myr",
+    amount: await calculateOrderAmount(req.query.id),
+    currency: "eur",
     automatic_payment_methods: {
       enabled: true,
     },

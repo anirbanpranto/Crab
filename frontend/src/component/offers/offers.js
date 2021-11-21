@@ -70,6 +70,7 @@ function Offer() {
     console.log(appointment)
     console.log("http://localhost:1337/v1/appointments/accept?id="+appointment.id+"&washer="+user.user.id)
     axios.post("http://localhost:1337/v1/appointments/accept?id="+appointment.id+"&washer="+user.user.id);
+    window.location.reload(false)
   }
 
   return (

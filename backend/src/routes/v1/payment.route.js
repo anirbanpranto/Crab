@@ -9,4 +9,8 @@ router
   .route('/session')
   .get(paymentController.createSession)
 
+router
+  .route('/:paymentId')
+  .patch(paymentController.updatePayment)
+
 module.exports = router;

@@ -71,7 +71,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/mypay" element={<MyPay />} />
-            <Route path="/successful/:appointment_id" element={<Success />} />
+            <Route exact path="/successful/:payment_id" element={<Success />} />
             <Route path="/washers" element={<Washers />} />
             <Route path="/pricing" element={<Pricing />} />
             {/* <Route path="/logout"element={<Logout/>}/> */}
