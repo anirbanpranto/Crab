@@ -29,12 +29,12 @@ function ViewWRating() {
     const loggedIn = localStorage.getItem("loggedIn")
     setLoggedIn(loggedIn)
     setUser(user)
-    axios.get("http://localhost:1337/v1/appointments?customer=" + user.user.id).then((res) => {
+    axios.get("http://localhost:1337/v1/appointments?washer=" + user.user.id).then((res) => {
       setData(res.data)
     }).catch(err => {
       // setShow(true);
     })
-    if (user.user.role !== "customer") {
+    if (user.user.role !== "washer") {
       history('/home');
     }
     if (!loggedIn) {
@@ -73,7 +73,7 @@ function ViewWRating() {
     {
       name: 'Rating',
       cell:(row, index)=>{
-        return  row.rating ? <Badge bg="secondary">{row.rating.rate}</Badge> : <Button onClick={() => edit(index)} id={index}>Rate This</Button>
+        return  row.rating ? <Badge bg="secondary">{row.rating.rate}</Badge> : <Badge style={{backgroundColor:"red"}}>Not Rated</Badge> 
       }
     }
   ];
