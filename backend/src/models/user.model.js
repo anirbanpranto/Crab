@@ -44,6 +44,18 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    card: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    status: {
+      type: String,
+      required: true,
+      trim: true,
+      enum: ["Active", "Inactive", "Banned"]
+    },
+    appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment' }]
   },
   {
     timestamps: true,

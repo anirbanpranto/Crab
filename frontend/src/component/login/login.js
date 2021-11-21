@@ -2,7 +2,7 @@ import { Form, Button, Card, Row, Col, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../contexts/User';
 
 function Login() {
@@ -12,6 +12,12 @@ function Login() {
     const [show, setShow] = useState(false);
     const [success, setSuccess] = useState(false);
     //console.log(state)
+    useEffect(()=>{
+        const loggedIn = localStorage.getItem("loggedIn");
+        if(loggedIn){
+            history('/home');
+        }
+    }, [])
     const history = useNavigate();
     const reload = () => {
         window.location.reload(false)
@@ -42,7 +48,7 @@ function Login() {
             <Row>
                 <Col sm={3}></Col>
                 <Col sm={6}>
-                    <Card style={{ padding: 40 }}>
+                    <Card style={{ padding: 40, margin: "10%" }}>
                         <Card.Title>Login</Card.Title>
                         <Form>
                             <Form.Group className="mb-3" controlId="email">
@@ -68,7 +74,7 @@ function Login() {
                                     }}
                                 />
                             </Form.Group>
-                            <Button variant="primary" onClick={req}>
+                            <Button style={{backgroundColor:"purple"}} onClick={req}>
                                 Login
                             </Button>
                         </Form>

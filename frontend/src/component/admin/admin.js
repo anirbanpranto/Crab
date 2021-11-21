@@ -5,15 +5,27 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import background from '../../public/bg.png'
 
-function Home() {
+function Customer() {
     const history = useNavigate();
 
-    const register = () => {
-        history('/register')
+    const make = () => {
+        history('/washrequest')
     }
 
-    const login = () => {
-        history('/login')
+    const view = () => {
+        history('/washers')
+    }
+
+    const pay = () => {
+        history('/pay')
+    }
+
+    const rate = () => {
+        history('/rating')
+    }
+
+    const profile = () => {
+        history('/profile')
     }
     //window.location.reload(false)
     return (
@@ -22,16 +34,21 @@ function Home() {
                 <Col><img style={{ maxWidth: "100%" }} src={background}></img></Col>
                 <Col>
                     <Card style={{ padding: 40, margin: "20%", marginTop: "30%" }}>
-                        <Card.Title>Welcome to Mobile's Carwash</Card.Title>
+                        <Card.Title>Welcome to Mobile Carwash</Card.Title>
                         <Card.Body>
                             <Row style={{margin:10}}>
-                                <Button onClick={()=>login()} style={{ backgroundColor: "purple" }}>
-                                    Login
+                                <Button onClick={()=>profile()} style={{ backgroundColor: "purple" }}>
+                                    View Profile
                                 </Button>
                             </Row>
                             <Row style={{margin:10}}>
-                                <Button onClick={()=>register()} style={{ backgroundColor: "purple" }}>
-                                    Registration
+                                <Button onClick={()=>make()} style={{ backgroundColor: "purple" }}>
+                                    Set Pricing
+                                </Button>
+                            </Row>
+                            <Row style={{margin:10}}>
+                                <Button onClick={()=>view()} style={{ backgroundColor: "purple" }}>
+                                    View and Manage Washers
                                 </Button>
                             </Row>
                         </Card.Body>
@@ -42,4 +59,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Customer;

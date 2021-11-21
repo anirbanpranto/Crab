@@ -34,7 +34,10 @@ const queryUsers = async (filter, options) => {
  * @returns {Promise<User>}
  */
 const getUserById = async (id) => {
-  return User.findById(id);
+  console.log("tirg")
+  const user = User.findById(id);
+  await user.populate('appointments');
+  return user;
 };
 
 /**
@@ -43,7 +46,10 @@ const getUserById = async (id) => {
  * @returns {Promise<User>}
  */
 const getUserByEmail = async (email) => {
-  return User.findOne({ email });
+  const user = User.findOne({ email });
+  console.log(user.getPopulatedPaths())
+  await user.populate('appointments');
+  return user;
 };
 
 /**

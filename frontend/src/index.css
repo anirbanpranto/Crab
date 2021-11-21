@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.bg-primary{
+  background-color: purple;
+}
+
 Link {
   color: white;
 }
