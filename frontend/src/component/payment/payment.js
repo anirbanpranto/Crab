@@ -90,7 +90,7 @@ function ViewRating() {
     {
       name: 'Payment',
       cell: (row, index) => {
-        if(row.status === "Accepted"){
+        if(row.status === "Accepted" || row.status === "Archived"){
           return row.payment ? row.payment.status === "Paid" ? "Paid" : <Button style={{ backgroundColor: "purple" }} onClick={() => pay(index)}>Pay</Button> : <Button style={{ backgroundColor: "purple" }} onClick={() => pay(index)}>Pay</Button>
         }
         else{
