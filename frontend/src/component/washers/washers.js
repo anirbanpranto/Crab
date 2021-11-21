@@ -27,54 +27,72 @@ function ViewRating() {
   const loadData = async ()=>{
     const user = JSON.parse(localStorage.getItem('user'));
     const loggedIn = localStorage.getItem("loggedIn")
-    setLoggedIn(loggedIn)
-    setUser(user)
-    axios.get("http://localhost:1337/v1/appointments?washer=" + user.user.id).then((res) => {
-      setData(res.data)
-    }).catch(err => {
-      // setShow(true);
-    })
-    if (user.user.role !== "washer") {
-      history('/home');
-    }
     if (!loggedIn) {
       history('/home');
     }
+    setLoggedIn(loggedIn)
+    setUser(user)
+    axios.get("http://localhost:1337/v1/users?role=washer&limit=1000").then((res) => {
+      setData(res.data.results)
+    }).catch(err => {
+      // setShow(true);
+    })
+    if (!user || user.user.role !== "admin") {
+      history('/home');
+    }
+  }
+
+  const activate = (index) => {
+    axios.patch('http://localhost:1337/v1/users/'+data[index].id, {
+            status : "Active"
+        }).then((res)=>{
+            //user.user = res.data
+            //console.log(user)
+            localStorage.setItem("user", JSON.stringify(user))
+            window.location.reload()
+        })
+  }
+
+  const ban = (index) => {
+    axios.patch('http://localhost:1337/v1/users/'+data[index].id, {
+            status: "Banned"
+        }).then((res)=>{
+            //user.user = res.data
+            //console.log(user)
+            localStorage.setItem("user", JSON.stringify(user))
+            window.location.reload()
+        })
   }
 
   const handleClose = () => setShow(false);
 
   const columns = [
     {
-      name: 'Address',
-      selector: row => row.address,
+      name: 'Name',
+      selector: row => row.name,
       sortable: true,
     },
     {
-      name: 'Cartype',
-      selector: row => row.cartype,
-      sortable: true,
-    },
-    {
-      name: 'Service Type',
-      selector: row => row.serviceType,
-      sortable: true,
-    },
-    {
-      name: 'Schedule',
-      selector: row => moment(row.schedule).format("DD/MM/YY"),
+      name: 'Email',
+      selector: row => row.email,
       sortable: true,
     },
     {
       name: 'Status',
-      selector: row => row.status,
-      sortable: true,
+      cell:(row, index)=>{
+        return  row.status ? <Badge bg="secondary">{row.status}</Badge> : "-"
+      }
     },
     {
-      name: 'Rating',
+      name: 'Status',
       cell:(row, index)=>{
-        return  row.rating ? <Badge bg="secondary">{row.rating.rate}</Badge> : "-"
+        return  row.status ? row.status === "Active"? <Button onClick={()=>ban(index)} style={{backgroundColor:"purple"}}>Ban</Button> : (row.status === "Inactive" || row.status === "Banned") ? <Button onClick={()=>activate(index)} style={{backgroundColor:"purple"}}>Activate</Button> : <Button onClick={()=>ban(index)} style={{backgroundColor:"purple"}}>Ban</Button> : <Button onClick={()=>activate(index)} style={{backgroundColor:"purple"}}>Activate</Button>
       }
+    },
+    {
+      name: 'Registered At',
+      selector: row => moment(row.createdAt).format("DD/MM/YY"),
+      sortable: true,
     }
   ];
 

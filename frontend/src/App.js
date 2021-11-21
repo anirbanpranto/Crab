@@ -14,6 +14,7 @@ import Home from './component/home/home';
 import Logout from './component/logout/logout';
 import Sound from './component/sound/sound';
 import Washer from './component/washer/washer'
+import Washers from './component/washers/washers'
 import Admin from './component/admin/admin'
 import Customer from './component/customer/customer'
 import Warning from './component/contact/warning'
@@ -27,6 +28,7 @@ import Profile from './component/profile/profile';
 import Jobs from './component/jobs/jobs'
 import MyPay from './component/mypayment/payment';
 import Success from './component/success/success'
+import Pricing from './component/pricing/pricing';
 
 function App() {
   const [user, setUser] = useState({});
@@ -70,6 +72,8 @@ function App() {
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/mypay" element={<MyPay />} />
             <Route path="/successful/:appointment_id" element={<Success />} />
+            <Route path="/washers" element={<Washers />} />
+            <Route path="/pricing" element={<Pricing />} />
             {/* <Route path="/logout"element={<Logout/>}/> */}
           </Routes>
         </BrowserRouter>

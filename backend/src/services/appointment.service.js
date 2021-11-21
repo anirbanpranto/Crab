@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
-const { Appointment } = require('../models');
+const { Appointment, Pricing } = require('../models');
+const { Payment } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -8,6 +9,42 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<Appointment>}
  */
 const createAppointment = async (appointmentBody) => {
+  const { pricingService } = require('.');
+  const pricing = await pricingService.queryPricings({});
+  const carType = appointmentBody.cartype;
+  const serviceType = appointmentBody.serviceType
+  let price = 0;
+  switch(carType){
+    case "SUV":
+      price += 20;
+      break;
+    case "Sedan":
+      price += 15;
+      break;
+    case "Truck":
+      price += 30
+      break;
+    case "Hatchback":
+      price += 10;
+      break;
+  }
+  switch(serviceType){
+    case "Deep Clean":
+      price += 20;
+      break;
+    case "Interior Vacuum":
+      price += 10;
+      break;
+    case "Normal":
+      price += 15
+      break;
+  }
+  const pay = await Payment.create({
+    status: "Due",
+    type: "Payment",
+    amount: pricing[0].rate + price
+  })
+  appointmentBody.payment = pay._id;
   return Appointment.create(appointmentBody);
 };
 
@@ -66,6 +103,25 @@ const queryAppointments = async (filter) => {
       {
           path: 'washer',
           model:'User',
+          options: {
+              sort:{ },
+              skip: 0,
+              limit : 1000
+          },
+          match:{
+              // filter result in case of multiple result in populate
+              // may not useful in this case
+          }
+      }
+  ]
+  )
+  .populate(
+    [
+      // here array is for our memory. 
+      // because may need to populate multiple things
+      {
+          path: 'payment',
+          model:'Payment',
           options: {
               sort:{ },
               skip: 0,

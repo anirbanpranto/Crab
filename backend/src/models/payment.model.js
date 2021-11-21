@@ -14,6 +14,12 @@ const paymentSchema = mongoose.Schema(
       trim: true,
       enum: ["Payment", "Refund"]
     },
+    status: {
+      type: String,
+      required: true,
+      trim: true,
+      enum: ["Paid", "Due"]
+    },
     appointment: { type: mongoose.Schema.Types.ObjectId, ref: 'Appointment' }
   },
   {

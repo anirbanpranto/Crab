@@ -9,7 +9,7 @@ function Customer() {
     const history = useNavigate();
 
     const make = () => {
-        history('/washrequest')
+        history('/pricing')
     }
 
     const view = () => {
