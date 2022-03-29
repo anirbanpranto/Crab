@@ -46,7 +46,7 @@ function App() {
         <BrowserRouter>
           <Navbar style={{backgroundColor:"purple"}} variant="dark">
             <Container>
-              <Navbar.Brand href="/home">Mobile Carwash</Navbar.Brand>
+              <Navbar.Brand href="/home">Crab</Navbar.Brand>
               <Nav className="me-auto">
                 <Nav.Link href="/home">Home</Nav.Link>
                 {loggedIn ? null : <Nav.Link href="/register">Register</Nav.Link>}

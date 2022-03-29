@@ -22,7 +22,7 @@ function Home() {
                 <Col><img style={{ maxWidth: "100%" }} src={background}></img></Col>
                 <Col>
                     <Card style={{ padding: 40, margin: "20%", marginTop: "30%" }}>
-                        <Card.Title>Welcome to Mobile's Carwash</Card.Title>
+                        <Card.Title>Crab is at your service!</Card.Title>
                         <Card.Body>
                             <Row style={{margin:10}}>
                                 <Button onClick={()=>login()} style={{ backgroundColor: "purple" }}>

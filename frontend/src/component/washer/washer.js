@@ -4,6 +4,7 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import background from '../../public/bg.png'
+import { VscAccount } from "react-icons/vsc";
 
 function Washer() {
     const history = useNavigate();
@@ -34,7 +35,7 @@ function Washer() {
                 <Col><img style={{ maxWidth: "100%" }} src={background}></img></Col>
                 <Col>
                     <Card style={{ padding: 40, margin: "20%", marginTop: "30%" }}>
-                        <Card.Title>Welcome to Mobile Carwash</Card.Title>
+                        <Card.Title>Crab! Choose a service.</Card.Title>
                         <Card.Body>
                             <Row style={{margin:10}}>
                                 <Button onClick={()=>profile()} style={{ backgroundColor: "purple" }}>
