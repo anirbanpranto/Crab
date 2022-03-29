@@ -3,5 +3,5 @@ Boilerplate Code was taken from [Here](https://github.com/hagopj13/node-express-
 
 ```bash
 yarn
-yarn-debug
+yarn dev
 ```
