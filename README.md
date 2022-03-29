@@ -6,19 +6,19 @@ This app is a really simple RESTful API based system. We have a stateless backen
 
 # Screenshots
 
-## Dashboard
+## Dashboard (Customer)
 ![Dashboard](/assets/Cust_Dashboard.png)
 
-## Make Request
+## Make Request (Customer)
 ![Make Request](/assets/make_req.png)
 
-## View Request
+## View Request (Customer)
 ![View Request](/assets/view_req.png)
 
 ## View Available Jobs (Washer)
 ![Jobs](/assets/Available.png)
 
-## Job History
+## Job History (Washer)
 ![Job History](/assets/Job_History.png)
 
 ## Payment Flow and Rules
